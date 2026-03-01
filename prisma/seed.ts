@@ -1,8 +1,11 @@
+import "dotenv/config"
 import { PrismaClient } from "@prisma/client"
+import { PrismaPg } from "@prisma/adapter-pg"
 import bcrypt from "bcryptjs"
 import { addDays, subDays, setHours, setMinutes } from "date-fns"
 
-const prisma = new PrismaClient()
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! })
+const prisma = new PrismaClient({ adapter })
 
 function makeTime(base: Date, hour: number, minute = 0) {
   return setMinutes(setHours(base, hour), minute)
