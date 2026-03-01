@@ -8,7 +8,7 @@ import {
   CalendarDays,
   ClipboardList,
   Users,
-  Scissors,
+  Package,
 } from "lucide-react"
 
 const navItems = [
@@ -16,7 +16,7 @@ const navItems = [
   { href: "/calendario", label: "Cal.", icon: CalendarDays },
   { href: "/turnos", label: "Turnos", icon: ClipboardList },
   { href: "/clientes", label: "Clientes", icon: Users },
-  { href: "/servicios", label: "Servicios", icon: Scissors },
+  { href: "/inventario", label: "Stock", icon: Package },
 ]
 
 export function BottomNav() {

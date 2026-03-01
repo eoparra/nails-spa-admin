@@ -9,6 +9,7 @@ import {
   ClipboardList,
   Users,
   Scissors,
+  Package,
   LogOut,
 } from "lucide-react"
 import { signOut } from "next-auth/react"
@@ -19,6 +20,7 @@ const navItems = [
   { href: "/turnos", label: "Turnos", icon: ClipboardList },
   { href: "/clientes", label: "Clientes", icon: Users },
   { href: "/servicios", label: "Servicios", icon: Scissors },
+  { href: "/inventario", label: "Inventario", icon: Package },
 ]
 
 export function Sidebar() {

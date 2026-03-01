@@ -18,6 +18,7 @@ async function main() {
   await prisma.service.deleteMany()
   await prisma.client.deleteMany()
   await prisma.user.deleteMany()
+  await prisma.inventoryItem.deleteMany()
 
   // Admin user
   const passwordHash = await bcrypt.hash("admin123", 12)
@@ -354,6 +355,43 @@ async function main() {
 
   const totalAppts = pastAppointments.length + todayAppointments.length + futureAppointments.length
   console.log(`✓ ${totalAppts} turnos creados`)
+
+  // Inventory
+  const inventoryItems = await prisma.inventoryItem.createMany({
+    data: [
+      // Esmaltes
+      { name: "Esmalte rojo rubí", category: "Esmaltes", quantity: 8, minQuantity: 3 },
+      { name: "Esmalte rosa nude", category: "Esmaltes", quantity: 12, minQuantity: 3 },
+      { name: "Esmalte blanco francés", category: "Esmaltes", quantity: 6, minQuantity: 3 },
+      { name: "Esmalte negro", category: "Esmaltes", quantity: 5, minQuantity: 2 },
+      { name: "Esmalte coral", category: "Esmaltes", quantity: 2, minQuantity: 3 },
+      { name: "Esmalte lila pastel", category: "Esmaltes", quantity: 9, minQuantity: 3 },
+      { name: "Esmalte top coat", category: "Esmaltes", quantity: 1, minQuantity: 2 },
+      // Gel
+      { name: "Gel builder transparente", category: "Gel & Acrílico", quantity: 3, minQuantity: 2 },
+      { name: "Gel color rosa bebé", category: "Gel & Acrílico", quantity: 4, minQuantity: 2 },
+      { name: "Gel color burdeos", category: "Gel & Acrílico", quantity: 7, minQuantity: 2 },
+      { name: "Base coat gel", category: "Gel & Acrílico", quantity: 2, minQuantity: 2 },
+      { name: "Top coat gel sin limpieza", category: "Gel & Acrílico", quantity: 1, minQuantity: 2 },
+      // Herramientas
+      { name: "Limas de cartón (pack)", category: "Herramientas", quantity: 45, minQuantity: 10 },
+      { name: "Limas de vidrio", category: "Herramientas", quantity: 6, minQuantity: 3 },
+      { name: "Buffers (pack)", category: "Herramientas", quantity: 20, minQuantity: 10 },
+      { name: "Palitos de naranjo", category: "Herramientas", quantity: 80, minQuantity: 20 },
+      { name: "Pincel para gel #4", category: "Herramientas", quantity: 2, minQuantity: 1 },
+      { name: "Pincel nail art fino", category: "Herramientas", quantity: 3, minQuantity: 1 },
+      // Consumibles
+      { name: "Algodón (bolsa 100g)", category: "Consumibles", quantity: 4, minQuantity: 2 },
+      { name: "Papel film / aluminio", category: "Consumibles", quantity: 3, minQuantity: 2 },
+      { name: "Guantes descartables (caja)", category: "Consumibles", quantity: 2, minQuantity: 1 },
+      { name: "Acetona pura (500ml)", category: "Consumibles", quantity: 2, minQuantity: 1 },
+      { name: "Removedor suave (500ml)", category: "Consumibles", quantity: 3, minQuantity: 2 },
+      { name: "Alcohol isopropílico (500ml)", category: "Consumibles", quantity: 1, minQuantity: 2 },
+      { name: "Toallitas sin pelusa (pack)", category: "Consumibles", quantity: 5, minQuantity: 2 },
+    ],
+  })
+  console.log(`✓ ${inventoryItems.count} ítems de inventario creados`)
+
   console.log("\n✅ Base de datos seed completada!")
   console.log("   Login: admin@nailsspa.com / admin123")
 }

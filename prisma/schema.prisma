@@ -69,3 +69,13 @@ enum AppointmentStatus {
   CANCELLED
   NO_SHOW
 }
+
+model InventoryItem {
+  id          String   @id @default(cuid())
+  name        String
+  category    String?
+  quantity    Int      @default(0)
+  minQuantity Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
